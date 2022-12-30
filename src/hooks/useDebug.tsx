@@ -44,12 +44,10 @@ export function useDebug(id: string, value?: DebugValue) {
     setValue(id, value);
   }, [id, value]);
 
-  return {
-    set: (value: DebugValue) => {
-      requestAnimationFrame(() => {
-        setValue(id, value);
-      });
-    },
+  return (value: DebugValue) => {
+    requestAnimationFrame(() => {
+      setValue(id, value);
+    });
   };
 }
 

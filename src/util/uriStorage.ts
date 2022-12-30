@@ -1,7 +1,6 @@
 export class URIParamterStorage {
   getItem(key: string) {
     const uri = new URL(window.location.href);
-    console.log(key, uri.searchParams.get(key));
     return uri.searchParams.get(key);
   }
 

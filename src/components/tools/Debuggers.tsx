@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { isValidElement, useEffect, useRef, useState } from "react";
 import { useAllDebugs } from "../../hooks/useDebug";
 // import { styled } from "../../theme";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { useFrame } from "../../hooks/useFrame";
 import { Accordion } from "../ui/Accordion";
 import { FloatingPanel } from "../ui/FloatingPanel";
 import { Depth, styled } from "technic";
+import { ObjectInspector } from "react-inspector";
 
 export function Debuggers() {
   const allDebugs = useAllDebugs();
@@ -64,6 +65,14 @@ function DebugDisplay({ value }: { value: any }) {
   } else if (typeof value === "object") {
     if (value instanceof HTMLCanvasElement) {
       return <CanvasProxy canvas={value} />;
+    } else if (isValidElement(value)) {
+      return value;
+    } else {
+      return (
+        <Primitive>
+          <ObjectInspector expandLevel={1} theme="chromeDark" data={value} />
+        </Primitive>
+      );
     }
   }
   return null;

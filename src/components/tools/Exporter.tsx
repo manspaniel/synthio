@@ -5,8 +5,6 @@ import { useConfigValue } from "../../hooks/useConfig";
 import { useOptions } from "../../hooks/useOptions";
 import { useRecording } from "../../hooks/useRecording";
 import { downloadFile } from "../../util/download-file";
-import { Input } from "../ui/Input";
-// import { ToolbarGroup, ToolbarHeading } from "../ui/Toolbar";
 
 export function Exporter() {
   const zoom = useOptions((ops) => ops.zoom);
