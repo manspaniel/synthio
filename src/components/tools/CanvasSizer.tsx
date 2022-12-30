@@ -8,7 +8,6 @@ import {
 } from "technic";
 import { useCanvasSize } from "../../hooks/useCanvasSize";
 import { useConfigValue } from "../../hooks/useConfig";
-import { Input } from "../ui/Input";
 // import { Property, PropertyList } from "../ui/Property";
 // import { ToolbarGroup, ToolbarHeading } from "../ui/Toolbar";
 

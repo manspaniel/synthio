@@ -1,8 +1,7 @@
-import { styled } from "technic";
+import { styled, PropertyList, PropertyItem } from "technic";
 import { Control, Schema, useInputStore } from "../../controls";
 import { Accordion } from "../ui/Accordion";
 import { FloatingPanel } from "../ui/FloatingPanel";
-import { PropertyListItem, PropertyList } from "../ui/PropertyList";
 
 export function Controls() {
   const groups = useInputStore((store) => store.groups);
@@ -29,11 +28,11 @@ type InputGroupProps = {
 function InputGroup({ title, schema }: InputGroupProps) {
   return (
     <Accordion title={title ?? "Controls"}>
-      <PropertyList>
+      <PropertyList splitSize={0.5}>
         {Object.entries(schema).map(([key, control]) => (
-          <PropertyListItem key={key} label={key}>
+          <PropertyItem key={key} label={key}>
             <InputItem key={key} id={key} control={control} />
-          </PropertyListItem>
+          </PropertyItem>
         ))}
       </PropertyList>
     </Accordion>

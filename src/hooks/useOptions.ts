@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import { URIParamterStorage } from "../util/uriStorage";
 
 type OptionsStore = {
   // Canvas Settings
@@ -93,10 +94,25 @@ export const useOptions = create<OptionsStore>()(
       },
 
       // Recording
-      recording: false,
+      // recording: false,
     }),
     {
       name: "g7-options",
+      getStorage() {
+        return new URIParamterStorage();
+      },
+      partialize(state) {
+        return {
+          canvasHeight: state.canvasHeight,
+          canvasWidth: state.canvasWidth,
+          duration: state.duration,
+          fps: state.fps,
+          loop: state.loop,
+          playing: state.playing,
+          translation: state.translation,
+          zoom: state.zoom,
+        };
+      },
     }
   )
 );

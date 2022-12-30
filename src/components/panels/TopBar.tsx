@@ -1,20 +1,9 @@
-import { useCanvasSize } from "../../hooks/useCanvasSize";
-import { useConfig, useConfigValue } from "../../hooks/useConfig";
 import { useGenerateStore } from "../../hooks/useGenerate";
 import { CanvasSizer } from "../tools/CanvasSizer";
 import { Generate } from "../tools/Generate";
 import { Timer } from "../tools/Timer";
 import { Zoomer } from "../tools/Zoomer";
-// import { Button } from "../ui/Button";
-import { Input } from "../ui/Input";
-import {
-  Depth,
-  styled,
-  Toolbar,
-  // ToolbarGroup,
-  // ToolbarHeading,
-  // ToolbarSpacer,
-} from "technic";
+import { Depth, styled, Toolbar } from "technic";
 import { Exporter } from "../tools/Exporter";
 
 export function TopBar() {
@@ -22,7 +11,7 @@ export function TopBar() {
   return (
     <Wrapper>
       <Depth level={2}>
-        <Toolbar size="md">
+        <Toolbar size="xs">
           <CanvasSizer />
           <Zoomer />
           <Timer />

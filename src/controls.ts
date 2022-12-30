@@ -1,6 +1,8 @@
 import create from "zustand";
 import { ReactElement, useEffect, useMemo } from "react";
 import { useOptions } from "./hooks/useOptions";
+import { persist } from "zustand/middleware";
+import { URIParamterStorage } from "./util/uriStorage";
 
 export type Control<TValue = any, TOptions = any> = {
   value: TValue;
@@ -68,25 +70,40 @@ type InputStore = {
   updateValue: (key: string, value: any) => void;
 };
 
-export const useInputStore = create<InputStore>((set, get) => ({
-  values: {},
-  groups: [],
-  addGroup(group) {
-    set((state) => ({
-      groups: [...state.groups, group],
-    }));
-    return () => {
-      set((state) => ({
-        groups: state.groups.filter((g) => g !== group),
-      }));
-    };
-  },
-  updateValue(key, value) {
-    useOptions.setState({
-      needsRedraw: true,
-    });
-    set((state) => ({
-      values: { ...state.values, [key]: value },
-    }));
-  },
-}));
+export const useInputStore = create<InputStore>()(
+  persist(
+    (set, get) => ({
+      values: {},
+      groups: [],
+      addGroup(group) {
+        set((state) => ({
+          groups: [...state.groups, group],
+        }));
+        return () => {
+          set((state) => ({
+            groups: state.groups.filter((g) => g !== group),
+          }));
+        };
+      },
+      updateValue(key, value) {
+        useOptions.setState({
+          needsRedraw: true,
+        });
+        set((state) => ({
+          values: { ...state.values, [key]: value },
+        }));
+      },
+    }),
+    {
+      name: "synthio-inputs",
+      getStorage() {
+        return new URIParamterStorage();
+      },
+      partialize(state) {
+        return {
+          values: state.values,
+        };
+      },
+    }
+  )
+);
