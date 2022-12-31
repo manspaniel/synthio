@@ -1,5 +1,4 @@
 import { TextInput } from "technic";
-import { Input } from "../components/ui/Input";
 import type { Control } from "../controls";
 
 type Options = {

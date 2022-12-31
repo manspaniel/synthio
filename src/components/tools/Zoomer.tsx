@@ -1,6 +1,5 @@
 import { Button, NumberInput, Toolbar } from "technic";
 import { useOptions } from "../../hooks/useOptions";
-import { Input } from "../ui/Input";
 // import { ToolbarGroup, ToolbarHeading } from "../ui/Toolbar";
 
 export function Zoomer() {
@@ -9,7 +8,7 @@ export function Zoomer() {
   const panTo = useOptions((ops) => ops.panTo);
   return (
     <Toolbar.Group>
-      <Toolbar.Heading>Zoom</Toolbar.Heading>
+      {/* <Toolbar.Heading>Zoom</Toolbar.Heading> */}
       {/* <Input
         type="number"
         value={zoom}
@@ -29,6 +28,7 @@ export function Zoomer() {
         max={10}
         step={0.02}
         scale={0.5}
+        suffix="x"
       />
       <Button
         onClick={(e) => {

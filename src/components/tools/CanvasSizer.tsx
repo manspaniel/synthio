@@ -29,6 +29,16 @@ export function CanvasSizer() {
           </Button>
         }
       >
+        <input
+          type="text"
+          style={{
+            opacity: 0,
+            position: "absolute",
+            left: "-10px",
+            width: 0,
+            height: 0,
+          }}
+        />
         <PropertyList splitSize={0.5}>
           <PropertyItem label="Width">
             <NumberInput

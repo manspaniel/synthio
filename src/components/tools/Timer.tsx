@@ -1,4 +1,3 @@
-import { Input } from "../ui/Input";
 import { MdPause, MdPlayArrow, MdReplay } from "react-icons/md";
 import { TimeSlider } from "../ui/TimeSlider";
 import { useOptions } from "../../hooks/useOptions";

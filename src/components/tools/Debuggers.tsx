@@ -40,21 +40,6 @@ function DebugItem(props: ItemProps) {
   );
 }
 
-// const Item = styled("div", {
-//   background: "$panel",
-//   borderBottom: "1px solid $border",
-//   ".debug-title": {
-//     fontWeight: "bold",
-//     padding: "$2",
-//     borderBottom: "1px solid $border",
-//     display: "flex",
-//     gap: "$2",
-//     alignItems: "center",
-//     cursor: "pointer",
-//   },
-//   "&:last-child": {},
-// });
-
 function DebugDisplay({ value }: { value: any }) {
   if (typeof value === "number") {
     return <Primitive>{value}</Primitive>;

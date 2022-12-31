@@ -54,7 +54,7 @@ export const ThemeProvider = createTheme({
 
 globalCss({
   "@import": [
-    "https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap",
+    "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap",
   ],
 })();
 

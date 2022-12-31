@@ -11,11 +11,11 @@ export function TopBar() {
   return (
     <Wrapper>
       <Depth level={2}>
-        <Toolbar size="xs">
-          <CanvasSizer />
-          <Zoomer />
-          <Timer />
+        <Toolbar size="md">
           {hasGenerator && <Generate />}
+          <Toolbar.Spacer />
+          <Timer />
+          <Toolbar.Spacer />
           <Exporter />
         </Toolbar>
       </Depth>

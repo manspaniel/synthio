@@ -4,6 +4,7 @@ import { Options, useConfig } from "../hooks/useConfig";
 import { usePlayback } from "../hooks/usePlayback";
 import { useRecordingHandler } from "../hooks/useRecording";
 import { ThemeProvider } from "../theme";
+import { BottomBar } from "./panels/BottomBar";
 import { CanvasDisplay } from "./panels/CanvasDisplay";
 import { Controls } from "./panels/Controls";
 import { TopBar } from "./panels/TopBar";
@@ -36,6 +37,7 @@ export function Studio(props: Props) {
           {props.debuggers && <Debuggers />}
           <CanvasDisplay />
         </Main>
+        {props.ui && <BottomBar />}
       </Wrapper>
     </ThemeProvider>
   );
