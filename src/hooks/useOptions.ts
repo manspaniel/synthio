@@ -43,8 +43,8 @@ export const useOptions = create<OptionsStore>()(
         y: 0,
       },
       zoom: 1,
-      canvasWidth: 100,
-      canvasHeight: 100,
+      canvasWidth: undefined,
+      canvasHeight: undefined,
       zoomBy: (zoom: number) => {
         set({
           zoom: Math.max(0.3, get().zoom + zoom),
@@ -97,7 +97,7 @@ export const useOptions = create<OptionsStore>()(
       // recording: false,
     }),
     {
-      name: "g7-options",
+      name: "options",
       getStorage() {
         return new URIParamterStorage();
       },

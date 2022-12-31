@@ -6,7 +6,12 @@ import { useFrame } from "../../hooks/useFrame";
 import { Accordion } from "../ui/Accordion";
 import { FloatingPanel } from "../ui/FloatingPanel";
 import { Depth, styled } from "technic";
-import { ObjectInspector } from "react-inspector";
+import { ObjectInspector, chromeDark } from "react-inspector";
+
+const INSPECTOR_THEME = {
+  ...chromeDark,
+  BASE_BACKGROUND_COLOR: "transparent",
+};
 
 export function Debuggers() {
   const allDebugs = useAllDebugs();
@@ -55,7 +60,11 @@ function DebugDisplay({ value }: { value: any }) {
     } else {
       return (
         <Primitive>
-          <ObjectInspector expandLevel={1} theme="chromeDark" data={value} />
+          <ObjectInspector
+            expandLevel={1}
+            theme={INSPECTOR_THEME as any}
+            data={value}
+          />
         </Primitive>
       );
     }

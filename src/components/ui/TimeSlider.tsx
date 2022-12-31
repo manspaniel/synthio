@@ -1,5 +1,5 @@
 import { ReactElement, useMemo } from "react";
-import { inputStyle, styled } from "technic";
+import { controlSize, inputStyle, styled } from "technic";
 // import { inputStyle } from "./Input";
 
 type Props = {
@@ -13,7 +13,7 @@ export function TimeSlider(props: Props) {
   const ticks = useMemo(() => {
     const items: ReactElement[] = [];
     const interval = props.duration > 20 ? 5 : 1;
-    for (let i = 1; i < Math.floor(props.duration); i += interval) {
+    for (let i = 1; i <= Math.floor(props.duration); i += interval) {
       items.push(
         <span
           key={i}
@@ -27,7 +27,13 @@ export function TimeSlider(props: Props) {
 
   return (
     <Wrapper>
-      <TimeLabel>{Number(props.value).toFixed(2)}</TimeLabel>
+      <TimeLabel
+        type="number"
+        value={Number(props.value).toFixed(2)}
+        onChange={(e) => {
+          props.onChange?.(e.currentTarget.valueAsNumber);
+        }}
+      />
       <SliderWrapper>
         {ticks}
         <Slider
@@ -45,24 +51,33 @@ export function TimeSlider(props: Props) {
   );
 }
 
-export const Wrapper = styled("div", inputStyle, {
+export const Wrapper = styled("div", inputStyle, controlSize, {
   display: "flex",
   flex: "1 1 auto",
   alignItems: "center",
   overflow: "hidden",
 });
 
-const TimeLabel = styled("div", {
+const TimeLabel = styled("input", {
+  appearance: "textfield",
+  border: 0,
+  background: "transparent",
+  font: "inherit",
   padding: "0 $2",
   width: "5em",
   textAlign: "right",
+  color: "inherit",
+  outline: "0",
+  "&::-webkit-outer-spin-button,&::-webkit-inner-spin-button": {
+    appearance: "none",
+    margin: 0,
+  },
 });
 
 export const SliderWrapper = styled("div", {
   backgroundColor: "$background",
   position: "relative",
   borderLeft: "2px solid $border1",
-  height: "100%",
   ".tick": {
     position: "absolute",
     top: 0,
@@ -74,6 +89,8 @@ export const SliderWrapper = styled("div", {
 });
 
 export const Slider = styled("input", {
+  position: "relative",
+  zIndex: 1,
   appearance: "none",
   backgroundColor: "transparent",
   padding: 0,

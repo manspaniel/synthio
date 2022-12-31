@@ -22,7 +22,7 @@ export function Timer() {
         suffix="fps"
         type="number"
         min={1}
-        max={100}
+        max={120}
         step={1}
         value={timing.fps}
         onChange={(e) => {
@@ -32,8 +32,7 @@ export function Timer() {
       <NumberInput
         suffix="seconds"
         type="number"
-        min={0.5}
-        max={100}
+        min={1}
         step={0.5}
         width={"5em"}
         value={timing.duration}
