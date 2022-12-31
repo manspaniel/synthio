@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { styled } from "technic";
-import { Options, useConfig } from "../hooks/useConfig";
+import { Options, useConfig, useConfigValue } from "../hooks/useConfig";
 import { usePlayback } from "../hooks/usePlayback";
 import { useRecordingHandler } from "../hooks/useRecording";
 import { ThemeProvider } from "../theme";
@@ -15,6 +15,12 @@ type Props = Options;
 export function Studio(props: Props) {
   const [ready, setReady] = useState(false);
   const setOptions = useConfig((store) => store.setOptions);
+
+  const title = useConfigValue("title");
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   useEffect(() => {
     setOptions(props);

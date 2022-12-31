@@ -2,6 +2,7 @@ import { ReactElement, ReactNode } from "react";
 import create from "zustand";
 
 export type Options = {
+  title: string;
   timeControl?: boolean;
   recording?: boolean;
   ui?: boolean;
@@ -23,7 +24,9 @@ type OptionsStore = {
 };
 
 export const useConfig = create<OptionsStore>((set, get) => ({
-  options: {},
+  options: {
+    title: "Unnamed Artwork",
+  },
   setOptions: (options) => {
     set({ options });
   },

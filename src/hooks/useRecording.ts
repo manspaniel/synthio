@@ -3,6 +3,7 @@ import create from "zustand";
 import { downloadFile } from "../util/download-file";
 import { WebMGLVideo } from "../util/webm";
 import { useCanvasGetter } from "./useCanvas";
+import { useConfigValue } from "./useConfig";
 import { useRenderFunction } from "./useFrame";
 import { useOptions } from "./useOptions";
 
@@ -23,6 +24,8 @@ export function useRecordingHandler() {
   const getCanvas = useCanvasGetter();
   const renderFrame = useRenderFunction();
 
+  const title = useConfigValue("title");
+
   useEffect(() => {
     if (recording.recording) {
       let state = useOptions.getState();
@@ -31,8 +34,11 @@ export function useRecordingHandler() {
 
       const video = new WebMGLVideo(state.fps, 1);
 
+      let cancelled = false;
+
       const scheduleNextFrame = () => {
         requestAnimationFrame(() => {
+          if (cancelled) return;
           state = useOptions.getState();
           frame++;
           if (frame > totalFrames) {
@@ -44,7 +50,7 @@ export function useRecordingHandler() {
             const result = video.compile() as Blob;
             console.log("Result", result);
             const uri = URL.createObjectURL(result);
-            downloadFile("Output.webm", uri);
+            downloadFile(`${title}_${new Date().toString()}.webm`, uri);
           } else {
             console.log("Frame", frame, "of", totalFrames);
             useOptions.setState({
@@ -62,6 +68,10 @@ export function useRecordingHandler() {
       };
 
       scheduleNextFrame();
+
+      return () => {
+        cancelled = true;
+      };
     }
   }, [recording.recording]);
 }

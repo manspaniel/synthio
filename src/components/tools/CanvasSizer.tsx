@@ -21,7 +21,7 @@ export function CanvasSizer() {
 
   return (
     <Toolbar.Group>
-      <Toolbar.Heading>Canvas Size</Toolbar.Heading>
+      <Toolbar.Heading>Canvas</Toolbar.Heading>
       <Popover
         trigger={
           <Button>

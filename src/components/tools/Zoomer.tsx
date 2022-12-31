@@ -8,7 +8,7 @@ export function Zoomer() {
   const panTo = useOptions((ops) => ops.panTo);
   return (
     <Toolbar.Group>
-      {/* <Toolbar.Heading>Zoom</Toolbar.Heading> */}
+      <Toolbar.Heading>Zoom</Toolbar.Heading>
       {/* <Input
         type="number"
         value={zoom}
@@ -27,7 +27,7 @@ export function Zoomer() {
         min={0.2}
         max={10}
         step={0.02}
-        scale={0.5}
+        scale={0.1}
         suffix="x"
       />
       <Button

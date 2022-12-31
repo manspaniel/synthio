@@ -17,6 +17,8 @@ export function Exporter() {
   const getCanvas = useCanvasGetter();
   const clock = useClock();
 
+  const name = useConfigValue("title");
+
   return (
     <Toolbar.Group>
       <Toolbar.Heading>Export</Toolbar.Heading>
@@ -42,7 +44,7 @@ export function Exporter() {
               const canvas = getCanvas();
               if (canvas) {
                 const uri = canvas.toDataURL("image/png");
-                downloadFile("output.png", uri);
+                downloadFile(`${name}_${new Date().toString()}.png`, uri);
               }
             }}
           >
