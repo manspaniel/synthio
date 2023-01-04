@@ -12,7 +12,7 @@ import { useConfigValue } from "../../hooks/useConfig";
 // import { ToolbarGroup, ToolbarHeading } from "../ui/Toolbar";
 
 export function CanvasSizer() {
-  const resizable = useConfigValue("canvas")?.resizable;
+  const resizable = useConfigValue("canvas")?.canResize;
   const size = useCanvasSize();
 
   if (!resizable) {

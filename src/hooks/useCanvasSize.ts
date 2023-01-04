@@ -16,7 +16,7 @@ export function useCanvasSize() {
   return {
     width: width ?? options.width,
     height: height ?? options.height,
-    useDPR: options.useDPR,
+    // useDPR: options.useDPR,
     set,
   };
 }

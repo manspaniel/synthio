@@ -8,31 +8,19 @@ export type Options = {
   ui?: boolean;
   debuggers?: boolean;
   tweaks?: boolean;
-  multirender?: boolean;
   canvas?: {
     width: number;
     height: number;
-    useDPR?: boolean;
-    resizable: boolean;
+    canResize: boolean;
+    canZoom: boolean;
   };
-  renderer?: () => ReactElement;
+  // renderer?: () => ReactElement;
 };
 
-type OptionsStore = {
-  options: Options;
-  setOptions: (options: Options) => void;
-};
-
-export const useConfig = create<OptionsStore>((set, get) => ({
-  options: {
-    title: "Unnamed Artwork",
-  },
-  setOptions: (options) => {
-    set({ options });
-  },
+export const useConfig = create<Options>((set, get) => ({
+  title: "Unnamed Artwork",
 }));
 
 export function useConfigValue<T extends keyof Options>(key: T): Options[T] {
-  const { options } = useConfig();
-  return options[key];
+  return useConfig((state) => state[key]);
 }

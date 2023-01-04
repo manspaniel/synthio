@@ -14,12 +14,12 @@ export function usePlayback() {
   const generator = useGeneratorInstance();
 
   useEffect(() => {
-    if (needsGenerate) {
-      generator.generate();
-      return () => {
-        generator.cancel();
-      };
-    }
+    // if (needsGenerate && generator) {
+    //   generator.generate();
+    //   return () => {
+    //     generator.cancel();
+    //   };
+    // }
     if (!recording) {
       let raf = 0;
       let lastTick = 0;

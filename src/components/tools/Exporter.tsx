@@ -29,7 +29,7 @@ export function Exporter() {
         </>
       ) : (
         <>
-          {allowRecording && (
+          {allowRecording !== false && (
             <Button
               onClick={() => {
                 setTime(0);

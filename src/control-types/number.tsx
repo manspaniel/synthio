@@ -26,16 +26,6 @@ export function number(
           onValueChange={onChange}
           stretch
         />
-        // <Input
-        //   type="number"
-        //   dragScale={options.scale}
-        //   draggableNumber
-        //   value={value}
-        //   step={options.step}
-        //   min={options.min}
-        //   max={options.max}
-        //   onChange={(e) => onChange(e.currentTarget.valueAsNumber)}
-        // />
       );
     },
   };

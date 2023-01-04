@@ -1,11 +1,15 @@
 import { Button, NumberInput, Toolbar } from "technic";
+import { useConfigValue } from "../../hooks/useConfig";
 import { useOptions } from "../../hooks/useOptions";
 // import { ToolbarGroup, ToolbarHeading } from "../ui/Toolbar";
 
 export function Zoomer() {
+  const zoomable = useConfigValue("canvas")?.canZoom;
   const zoom = useOptions((ops) => ops.zoom);
   const zoomTo = useOptions((ops) => ops.zoomTo);
   const panTo = useOptions((ops) => ops.panTo);
+
+  if (!zoomable) return null;
   return (
     <Toolbar.Group>
       <Toolbar.Heading>Zoom</Toolbar.Heading>

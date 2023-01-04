@@ -8,7 +8,7 @@ type Store = {
   addHandler: (handler: FrameHandler) => () => void;
 };
 
-const useFrameHandlers = create<Store>((set, get) => ({
+export const useFrameHandlers = create<Store>((set, get) => ({
   frameHandlers: [],
   addHandler: (handler) => {
     set((state) => ({

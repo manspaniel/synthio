@@ -7,9 +7,10 @@ type Store = {
   debugValues: Record<string, DebugValue>;
   setValue(id: string, value: DebugValue): void;
   removeValue(id: string): void;
+  clearValues(): void;
 };
 
-const useDebugStore = create<Store>((set, get) => ({
+export const useDebugStore = create<Store>((set, get) => ({
   debugValues: {},
   setValue(id, value) {
     set({
@@ -28,28 +29,33 @@ const useDebugStore = create<Store>((set, get) => ({
       debugValues: newValues,
     });
   },
+  clearValues() {
+    set({
+      debugValues: {},
+    });
+  },
 }));
 
-export function useDebug(id: string, value?: DebugValue) {
-  const setValue = useDebugStore((store) => store.setValue);
-  const removeValue = useDebugStore((store) => store.removeValue);
+// export function useDebug(id: string, value?: DebugValue) {
+//   const setValue = useDebugStore((store) => store.setValue);
+//   const removeValue = useDebugStore((store) => store.removeValue);
 
-  useEffect(() => {
-    return () => {
-      removeValue(id);
-    };
-  }, [id]);
+//   useEffect(() => {
+//     return () => {
+//       removeValue(id);
+//     };
+//   }, [id]);
 
-  useEffect(() => {
-    setValue(id, value);
-  }, [id, value]);
+//   useEffect(() => {
+//     setValue(id, value);
+//   }, [id, value]);
 
-  return (value: DebugValue) => {
-    requestAnimationFrame(() => {
-      setValue(id, value);
-    });
-  };
-}
+//   return (value: DebugValue) => {
+//     requestAnimationFrame(() => {
+//       setValue(id, value);
+//     });
+//   };
+// }
 
 export function useAllDebugs() {
   return useDebugStore((store) => store.debugValues);

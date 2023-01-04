@@ -20,7 +20,7 @@ export type Schema = {
 
 type ControlValue<T extends Control<any>> = T["value"];
 
-type SchemaValues<S extends Schema> = {
+export type SchemaValues<S extends Schema> = {
   [K in keyof S]: ControlValue<S[K]>;
 };
 

@@ -107,14 +107,14 @@ const CanvasContainer = styled("div", {
   top: "50%",
   left: "50%",
   transform:
-    "scale(var(--zoom)) translate(-50%, -50%) translate(var(--panX), var(--panY))",
+    "translate(-50%, -50%) translate(var(--panX), var(--panY)) scale(var(--zoom))",
   border: "1px solid $border",
   backgroundColor: "#333333",
-  width: "calc(var(--width)",
-  height: "calc(var(--height))",
   canvas: {
-    width: "100%",
-    height: "100%",
+    width: "calc(var(--width)",
+    height: "calc(var(--height))",
+    // width: "100%",
+    // height: "100%",
     imageRendering: "pixelated",
   },
   svg: {

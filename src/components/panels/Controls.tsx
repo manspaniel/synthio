@@ -28,7 +28,7 @@ type InputGroupProps = {
 function InputGroup({ title, schema }: InputGroupProps) {
   return (
     <Accordion title={title ?? "Controls"}>
-      <PropertyList splitSize={0.5}>
+      <PropertyList splitSize={0.4}>
         {Object.entries(schema).map(([key, control]) => (
           <PropertyItem key={key} label={key}>
             <InputItem key={key} id={key} control={control} />

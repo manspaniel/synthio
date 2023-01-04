@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { styled } from "technic";
 import { Options, useConfig, useConfigValue } from "../hooks/useConfig";
+import { useMain } from "../hooks/useMain";
 import { usePlayback } from "../hooks/usePlayback";
 import { useRecordingHandler } from "../hooks/useRecording";
 import { ThemeProvider } from "../theme";
@@ -10,11 +11,12 @@ import { Controls } from "./panels/Controls";
 import { TopBar } from "./panels/TopBar";
 import { Debuggers } from "./tools/Debuggers";
 
-type Props = Options;
+// type Props = Options;
+type Props = {};
 
 export function Studio(props: Props) {
   const [ready, setReady] = useState(false);
-  const setOptions = useConfig((store) => store.setOptions);
+  // const setOptions = useConfig((store) => store.setOptions);
 
   const title = useConfigValue("title");
 
@@ -22,12 +24,14 @@ export function Studio(props: Props) {
     document.title = title;
   }, [title]);
 
-  useEffect(() => {
-    setOptions(props);
-  }, [props]);
+  // useEffect(() => {
+  //   setOptions(props);
+  // }, [props]);
 
   usePlayback();
   useRecordingHandler();
+
+  useMain();
 
   useEffect(() => {
     setReady(true);
@@ -37,13 +41,13 @@ export function Studio(props: Props) {
   return (
     <ThemeProvider>
       <Wrapper>
-        {props.ui && <TopBar />}
+        <TopBar />
         <Main>
-          {props.tweaks && <Controls />}
-          {props.debuggers && <Debuggers />}
+          <Controls />
+          <Debuggers />
           <CanvasDisplay />
         </Main>
-        {props.ui && <BottomBar />}
+        <BottomBar />
       </Wrapper>
     </ThemeProvider>
   );
