@@ -96,8 +96,14 @@ function CanvasProxy({ canvas }: { canvas: HTMLCanvasElement }) {
   }, [canvas]);
 
   return (
-    <div>
+    <CanvasContainer>
       <canvas ref={ref} />
-    </div>
+    </CanvasContainer>
   );
 }
+
+const CanvasContainer = styled("div", {
+  canvas: {
+    maxWidth: "100%",
+  },
+});

@@ -106,11 +106,12 @@ const CanvasContainer = styled("div", {
   position: "absolute",
   top: "50%",
   left: "50%",
-  transform: "translate(-50%, -50%) translate(var(--panX), var(--panY))",
+  transform:
+    "scale(var(--zoom)) translate(-50%, -50%) translate(var(--panX), var(--panY))",
   border: "1px solid $border",
   backgroundColor: "#333333",
-  width: "calc(var(--width) * var(--zoom))",
-  height: "calc(var(--height) * var(--zoom))",
+  width: "calc(var(--width)",
+  height: "calc(var(--height))",
   canvas: {
     width: "100%",
     height: "100%",

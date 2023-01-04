@@ -18,11 +18,13 @@ const useCanvasStore = create<Store>((set, get) => ({
 }));
 
 export const useCanvasSetter = (
-  ref: MutableRefObject<HTMLCanvasElement | null>
+  ref: MutableRefObject<HTMLCanvasElement | null> | HTMLCanvasElement
 ) => {
   const setCanvas = useCanvasStore((store) => store.setCanvas);
   useEffect(() => {
-    if (ref) {
+    if (ref instanceof HTMLCanvasElement) {
+      setCanvas(ref);
+    } else if (ref) {
       setCanvas(ref.current);
     }
   }, [ref]);
