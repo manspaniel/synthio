@@ -6,12 +6,12 @@ import { useRecording } from "./useRecording";
 
 export function usePlayback() {
   const recording = useRecording((store) => store.recording);
-  const duration = useOptions((store) => store.duration);
+  // const duration = useOptions((store) => store.duration);
 
-  const needsGenerate = useGenerateStore((store) => store.needsGenerate);
+  // const needsGenerate = useGenerateStore((store) => store.needsGenerate);
 
   const renderFrame = useRenderFunction();
-  const generator = useGeneratorInstance();
+  // const generator = useGeneratorInstance();
 
   useEffect(() => {
     // if (needsGenerate && generator) {
@@ -38,8 +38,8 @@ export function usePlayback() {
               needsRedraw = true;
             }
             useOptions.setState({
-              time: state.loop ? nextTime % duration : nextTime,
-              playing: nextTime < duration || state.loop,
+              time: state.loop ? nextTime % state.duration : nextTime,
+              playing: nextTime < state.duration || state.loop,
               needsRedraw: false,
             });
           }
@@ -57,7 +57,7 @@ export function usePlayback() {
       schedule();
       return () => cancelAnimationFrame(raf);
     }
-  }, [needsGenerate, recording]);
+  }, [recording]);
 
   useEffect(() => {
     // Redraw whenever options change
