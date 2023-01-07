@@ -77,9 +77,7 @@ export function useMain() {
         );
         const values = {} as any;
         for (let key in schema) {
-          if (state.values[key] !== undefined) {
-            values[key] = state.values[key];
-          }
+          values[key] = state.values[key] ?? schema[key].value;
         }
         cleanups.push(
           useInputStore.subscribe((state) => {
@@ -105,17 +103,27 @@ export function useMain() {
       },
     };
 
-    const updateSize = () => {
+    let hasSentSize = false;
+    const updateSize = (force: boolean = false) => {
       const conf = useConfig.getState();
       const opts = useOptions.getState();
-      ctx.size.width = opts.canvasWidth ?? conf.canvas?.width ?? 100;
-      ctx.size.height = opts.canvasHeight ?? conf.canvas?.height ?? 100;
-      resizeHandlers.forEach((fn) => fn());
-      drawFrame();
+      const newWidth = opts.canvasWidth ?? conf.canvas?.width ?? 100;
+      const newHeight = opts.canvasHeight ?? conf.canvas?.height ?? 100;
+      if (
+        ctx.size.width !== newWidth ||
+        ctx.size.height !== newHeight ||
+        force
+      ) {
+        // hasSentSize = true;
+        ctx.size.width = newWidth;
+        ctx.size.height = newHeight;
+        resizeHandlers.forEach((fn) => fn());
+        drawFrame();
+      }
     };
 
-    cleanups.push(useOptions.subscribe(updateSize));
-    cleanups.push(useConfig.subscribe(updateSize));
+    cleanups.push(useOptions.subscribe(() => updateSize()));
+    cleanups.push(useConfig.subscribe(() => updateSize()));
 
     useDebugStore.getState().clearValues();
 
@@ -131,7 +139,7 @@ export function useMain() {
         }
       });
       promise.then(() => {
-        updateSize();
+        updateSize(true);
       });
     }
 

@@ -1,5 +1,5 @@
 import path, { join } from "path";
-import { createServer as createViteServer } from "vite";
+import { createServer as createViteServer, Plugin } from "vite";
 import express from "express";
 import react from "@vitejs/plugin-react";
 import { globby } from "globby";
@@ -49,25 +49,7 @@ export default async function createDevServer(opts: Options) {
         _main: mainFile,
       },
     },
-    plugins: [
-      react(),
-      {
-        name: "synthio-dev-server",
-        resolveId(id) {
-          if (id === "/_entry.tsx") {
-            return "\0SYNTHIO_ENTRY";
-          }
-        },
-        load(id) {
-          if (id === "\0SYNTHIO_ENTRY") {
-            return `
-              import start from 'synthio/dist/client-entry'
-              start();
-            `;
-          }
-        },
-      },
-    ],
+    plugins: [react(), glslPlugin(), entryPlugin()],
   });
 
   app.use(vite.middlewares);
@@ -95,4 +77,41 @@ export default async function createDevServer(opts: Options) {
       `Server running at http://${opts.host ?? "127.0.0.1"}:${opts.port}`
     );
   });
+}
+
+function glslPlugin(): Plugin {
+  return {
+    name: "synthio-glsl",
+    transform(code, id, options) {
+      if (id.match(/.(glsl|vert|frag)$/i)) {
+        let imports: string[] = [];
+        code = code.replace(/#include <?(.+)>?/g, (_, p1) => {
+          const name = "$" + imports.length;
+          imports.push(`import ${name} from './${p1}'`);
+          return "${" + name + "}";
+        });
+        const output = imports.join("\n") + `\nexport default \`${code}\``;
+        return output;
+      }
+    },
+  };
+}
+
+function entryPlugin(): Plugin {
+  return {
+    name: "synthio-entry",
+    resolveId(id) {
+      if (id === "/_entry.tsx") {
+        return "\0SYNTHIO_ENTRY";
+      }
+    },
+    load(id) {
+      if (id === "\0SYNTHIO_ENTRY") {
+        return `
+          import start from 'synthio/dist/client-entry'
+          start();
+        `;
+      }
+    },
+  };
 }

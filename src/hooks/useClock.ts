@@ -31,7 +31,7 @@ export function useClock() {
       clock.duration = state.duration;
       clock.fps = state.fps;
       clock.progress = state.time / state.duration;
-      clock.frame = Math.floor(clock.progress * state.fps);
+      clock.frame = Math.floor(clock.time * state.fps);
     });
   });
 

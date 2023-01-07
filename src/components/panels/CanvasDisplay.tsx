@@ -111,8 +111,8 @@ const CanvasContainer = styled("div", {
   border: "1px solid $border",
   backgroundColor: "#333333",
   canvas: {
-    width: "calc(var(--width)",
-    height: "calc(var(--height))",
+    width: "var(--width)",
+    height: "var(--height)",
     // width: "100%",
     // height: "100%",
     imageRendering: "pixelated",

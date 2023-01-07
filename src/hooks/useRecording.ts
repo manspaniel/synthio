@@ -41,7 +41,7 @@ export function useRecordingHandler() {
           if (cancelled) return;
           state = useOptions.getState();
           frame++;
-          if (frame > totalFrames) {
+          if (frame >= totalFrames) {
             console.log("Complete");
             recording.setRecording(false);
             useOptions.setState({
